@@ -24,6 +24,8 @@ Networking is handled by a mix of Aruba, HP, and Cisco switches:
 - **HP 48 Ethernet Switch** - 48-port Ethernet switch
 - **Cisco Switch (Small Business)** - Small business-grade Cisco switch
 - **Cisco Catalyst 4900M** - High-performance enterprise switch
+- **Dell Sonicwall TZ400 - Firewall/security appliance
+- **Dell Switch X1052 - 48 POE Switch
 
 ### Routers
 
