@@ -4,6 +4,7 @@
   Nvidia Tesla P40 24GB 
   GPU pass-through via Proxmox
 ```
+https://gist.github.com/pangyuteng/f01dbc4d7713dcf3804548561512cf81 
 ### psu
 
   + ? am using only one 1100w psu, the other 1100w is not plugged in.
