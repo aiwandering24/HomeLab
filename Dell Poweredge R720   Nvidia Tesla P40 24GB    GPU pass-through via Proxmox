@@ -1,0 +1,134 @@
+
+```
+  Dell Poweredge R720
+  Nvidia Tesla P40 24GB 
+  GPU pass-through via Proxmox
+```
+### psu
+
+  + ? am using only one 1100w psu, the other 1100w is not plugged in.
+
+  + dont have a UPS yet.
+
+### idrac
+
+  + upgrade idrac firmware, so you get to power on/off via http.
+
+### risers
+
+  + if installing at riser3, ensure the pci-e is x16 - some servers may come with a riser with 2 slots each with x8.
+
+### gpu power cables
+
+  + Please be mindful when purchasing the gpu power cable, there are 2 kinds of gpu power cables for dell servers PCI risers, one for the Nvidia Telsas and one for consumer "general purpose" GPUs. This is a step that SHALL NOT GO WRONG or else you may fry your server&GPU! read more here: https://kenmoini.com/post/2021/03/fun-with-servers-and-gpus
+
+### fan control
+  
+  + determine if you should enable/disable "3rd Party Card fan behavior"
+  + (?) enabling this allowed the GPU temp to hover at around 60C - while being used, Fan hovers in the range of 4200 to 7000 RPM. (typical GPU temp in a server room with AC will be around 55C under load). The Inlet and Exhaust Temp at 31 and 38C respectively (server is placed in the garage with no AC, with outdoor temp at 29C).
+
+  http://www.righteoushack.net/dell-poweredge-13th-gen-fan-noise/
+  https://www.reddit.com/r/Proxmox/comments/uf2d7l/proxmox_tesla_m40_passthrough_ubuntu_server_vm/iif2en3/?context=3
+
++ current settings, likely not optimal.
+```
+ssh idrac
+
+racadm set system.thermalsettings.AirExhaustTemp 255
+racadm set system.thermalsettings.FanSpeedOffset 0
+racadm set system.thermalsettings.ThermalProfile 0
+racadm set system.thermalsettings.ThirdPartyPCIFanResponse 1
+
+racadm get system.thermalsettings
+```
+```
+Fan at 9480RPM
+
+GPU Temp           60 C per nvidia-smi
+
+Fan1             | 8520 RPM          | ok
+Fan2             | 8400 RPM          | ok
+Fan3             | 8520 RPM          | ok
+Fan4             | 9360 RPM          | ok
+Fan5             | 10560 RPM         | ok
+Fan6             | 9960 RPM          | ok
+Inlet Temp       | 33 degrees C      | ok
+Exhaust Temp     | 37 degrees C      | ok
+Temp             | 55 degrees C      | ok
+Temp             | 46 degrees C      | ok
+Current 1        | 2.60 Amps         | ok
+Current 2        | no reading        | ns
+Voltage 1        | 110 Volts         | ok
+Voltage 2        | no reading        | ns
+Pwr Consumption  | 294 Watts         | ok
+
+Chassis Temp 38C
+
+```
+
+
+
+### proxmox
+
++ follow below link and stop prior section "Configuring the VM (Windows 10)", note the modifications listed below.
+  https://gist.github.com/baodrate/64f617e959725e934992b080e677656f
+
+  + in proxmox web interface, select vm, for hostpci - check `All Functions`,`ROM-Bar`,`PCI-Express`
+  
+  + for vm BIOS, use `Default (SeaBIOS)`.
+  + for vm Machine, use `q35`.
+  + edit vm conf `/etc/pve/qemu-server/${VM_ID}.conf` per below
+
+```
+cpu: host,hidden=1,flags=+pcid
+args: -cpu 'host,+kvm_pv_unhalt,+kvm_pv_eoi,hv_vendor_id=NV43FIX,kvm=off'
+```
+
+```
+# below is based on needs
+cores: 10
+memory: 262144
+scsi0: local-lvm:vm-100-disk-0,size=768G
+boot: order=scsi0;net0
+scsihw: virtio-scsi-pci
+hostpci0: 0000:42:00,pcie=1
+```
+
++ turn on the vm.
+
++ when installing ubuntu, don't install the driver.
+
++ boot up vm
+
++ check if gpu is present
+
+```
+lspci | grep 01:00
+```
+
++ install driver
+
+```
+sudo apt-add-repository -r ppa:graphics-drivers/ppa
+sudo apt update
+sudo apt remove nvidia*
+sudo apt autoremove
+sudo ubuntu-drivers autoinstall
+```
+
++ run `nvidia-smi` and get complaints, run below.
+
+```
+sudo rmmod nouveau
+sudo modprobe nvidia
+# https://unix.stackexchange.com/questions/219059/remove-nouveau-driver-nvidia-without-rebooting
+```
+
++ run `nvidia-smi` to confirm presense of gpu.
+
++ install nvidia container toolkit
+  https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+
++ confirm install success `docker run --runtime=nvidia --rm nvidia/cuda nvidia-smi`
+
+
