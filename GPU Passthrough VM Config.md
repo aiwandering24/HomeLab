@@ -1,0 +1,52 @@
+# Ubuntu 24.04 VM Configuration for GPU Passthrough
+
+This guide covers the specific Proxmox VM settings and guest OS configuration required to successfully pass through a GPU to an Ubuntu 24.04 virtual machine.
+
+---
+
+## 1. Proxmox VM Creation Settings
+When creating the VM in the Proxmox Web UI, use these specific parameters:
+
+
+| Tab | Setting | Value |
+| :--- | :--- | :--- |
+| **General** | Name | e.g., `Ubuntu-GPU` |
+| **System** | Machine | `q35` |
+| **System** | BIOS | `OVMF (UEFI)` |
+| **System** | Qemu Agent | `Enabled` (Checked) |
+| **CPU** | Type | `host` |
+| **Memory** | Ballooning | `Disabled` (Uncheck "Ballooning Device") |
+
+---
+
+## 2. Adding the GPU Hardware
+After the VM is created, navigate to the **Hardware** tab of the VM:
+
+1. Click **Add** > **PCI Device**.
+2. Select **Raw Device** and choose your GPU address (e.g., `0000:04:00.0`).
+3. Configure the following toggles:
+   - **All Functions**: `Checked` (Ensures the HDMI Audio at `04:00.1` is included).
+   - **ROM-Bar**: `Checked`.
+   - **Primary GPU**: `Checked` (Enable if this is the VM's main display).
+   - **PCI-Express**: `Checked`.
+
+---
+
+## 3. Guest OS Configuration (Inside Ubuntu 24.04)
+
+Once Ubuntu is installed and booted, perform the following steps to initialize the hardware.
+
+### A. Update the System
+```bash
+sudo apt update && sudo apt upgrade -y  
+```
+
+## 3. Assign GPU to VM
+```bash
+qm status 101
+qm stop 101 --skipped
+qm set <vmid> -args '-global q35-pcihost.pci-hole64-size=512G'
+qm list
+systemctl restart pve-cluster
+```
+
