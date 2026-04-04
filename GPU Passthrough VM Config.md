@@ -41,7 +41,7 @@ Once Ubuntu is installed and booted, perform the following steps to initialize t
 sudo apt update && sudo apt upgrade -y  
 ```
 
-## 3. Assign GPU to VM
+## 4. Assign GPU to VM
 ```bash
 qm status 101
 qm stop 101 --skipped
@@ -49,4 +49,14 @@ qm set <vmid> -args '-global q35-pcihost.pci-hole64-size=512G'
 qm list
 systemctl restart pve-cluster
 ```
+## 5. Fix the Remote Desktop Freeze Directly
+```bash
+sudo apt-get install --reinstall gnome-remote-desktop
+sudo reboot
+```
+## 5. Reinstall GNOME Desktop Environment
+```bash
+sudo apt update
+sudo apt install --reinstall ubuntu-gnome-desktop gdm3
 
+```
