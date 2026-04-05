@@ -133,6 +133,7 @@ Tip: I recommend version 550 for Ubuntu 24.04, as it is better optimized for the
 
 ```bash
 sudo apt install nvidia-driver-550
+sudo apt install nvidia-driver-535 nvidia-utils-535
 ```
 5. Final Configuration & Reboot
 Once the installation finishes without errors, trigger the final configuration and update your boot RAM disk:
