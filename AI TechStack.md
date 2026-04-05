@@ -1,4 +1,4 @@
-Local LLM Training + Inference + RAG Tech Stack (Your Hardware)
+#Local LLM Training + Inference + RAG Tech Stack (Your Hardware)
 You have a strong local “homelab AI cluster” for inference + fine-tuning + RAG, but there are two key constraints in your setup:
 
 Tesla P40 = Pascal (compute capability 6.1). [github.com], [nvidia.cn]
@@ -12,7 +12,7 @@ For fine‑tuning: use LoRA (avoid assumptions about tensor cores).
 For RAG: CPU/RAM heavy—your 128GB RAM servers are ideal.
 
 
-0) Recommended Role Assignment (Best Use of Each Machine)
+##0) Recommended Role Assignment (Best Use of Each Machine)
 A) Dell R720 (2× Tesla P40 24GB) — GPU Node #1
 
 Primary: Inference (7B–13B quantized), batch embeddings (optional), LoRA fine‑tuning (7B best).
@@ -22,7 +22,7 @@ Secondary: model serving gateway (OpenAI compatible), evaluation.
 Tesla P40 compute capability is 6.1 (Pascal). [github.com], [nvidia.cn]
 
 
-B) Dell R720xd (1× Tesla P40 24GB) — GPU Node #2
+##B) Dell R720xd (1× Tesla P40 24GB) — GPU Node #2
 
 Primary: LoRA fine‑tuning experiments, backup inference, scheduled GPU batch jobs.
 
@@ -45,7 +45,7 @@ Primary: file watchers, sensors, queue workers, health agents.
 Not suitable for heavy LLM compute.
 
 
-1) Base OS + GPU Drivers (Critical on P40)
+##1) Base OS + GPU Drivers (Critical on P40)
 1.1 OS Recommendation
 
 Ubuntu 22.04 LTS on R720/R720xd (best compatibility).
@@ -64,7 +64,7 @@ Install CUDA Toolkit only if you plan to compile CUDA extensions; otherwise PyTo
 Verify
 Shellnvidia-smiShow more lines
 
-2) Container First: Docker + NVIDIA Container Toolkit
+##2) Container First: Docker + NVIDIA Container Toolkit
 Why: avoids dependency conflicts, simplifies multi-service deployment, and makes GPU runtime consistent.
 2.1 Install Docker on:
 
@@ -74,7 +74,7 @@ One HP server (services node)
 2.2 Enable NVIDIA runtime + verify
 Shelldocker run --rm --gpus all nvidia/cuda:12.2.0-base-ubuntu22.04 nvidia-smiShow more lines
 
-3) Your Core “AI Platform” Stack (Local Cluster)
+##3) Your Core “AI Platform” Stack (Local Cluster)
 Think in 4 layers:
 
 Orchestration / Networking
@@ -99,7 +99,7 @@ NVIDIA device plugin for GPUs
 
 Recommendation: start with Compose → upgrade to k3s later.
 
-4) Inference Stack (Works on Tesla P40)
+##4) Inference Stack (Works on Tesla P40)
 Because Tesla P40 is compute capability 6.1, pick inference runtimes accordingly. [github.com], [nvidia.cn]
 4.1 Best Inference Choices for P40
 ✅ llama.cpp (GGUF) + llama-server
@@ -133,7 +133,7 @@ Practical advice: Start with llama.cpp/Ollama. Try vLLM later if needed.
 30B+: possible quantized but slower; context + throughput constraints
 
 
-5) Fine‑Tuning Stack (LoRA on Tesla P40)
+##5) Fine‑Tuning Stack (LoRA on Tesla P40)
 5.1 QLoRA / bitsandbytes Reality Check
 
 bitsandbytes supports NVIDIA GPUs Compute Capability 6.0+ overall. [huggingface.co]
@@ -160,7 +160,7 @@ Domain adapters for your documents
 Avoid “training from scratch”
 
 
-6) Data Extraction → Chunking → Embeddings → Vector DB → RAG
+##6) Data Extraction → Chunking → Embeddings → Vector DB → RAG
 This is the pipeline you asked for.
 6.1 Data Extraction (CPU-heavy — use HP servers)
 Document loaders
@@ -223,7 +223,7 @@ Haystack
 (or custom FastAPI)
 
 
-7) n8n Automation + Grafana Monitoring
+##7) n8n Automation + Grafana Monitoring
 7.1 n8n (Workflow automation)
 Run n8n on an HP server and connect to:
 
@@ -257,7 +257,7 @@ ingestion queue depth
 vector DB query times
 
 
-8) Reference Deployment: What to Install Where
+##8) Reference Deployment: What to Install Where
 GPU Node #1 — R720 (2× P40)
 
 NVIDIA driver + NVIDIA container toolkit
@@ -290,7 +290,7 @@ collectors, agents, status probes
 log forwarders
 
 
-9) Step-by-Step Install Order (Phased)
+##9) Step-by-Step Install Order (Phased)
 Phase 1 — GPU inference first
 
 Install Ubuntu 22.04 on R720/R720xd
@@ -313,7 +313,7 @@ Run LoRA SFT on small dataset
 Evaluate + merge adapter or serve adapter directly
 
 
-10) Performance Expectations (Realistic)
+##10) Performance Expectations (Realistic)
 Tesla P40 (Pascal, no tensor cores):
 
 Great for quantized inference
@@ -327,14 +327,14 @@ small batch size + gradient accumulation
 
 
 
-11) Common Gotchas With Your Hardware
+##11) Common Gotchas With Your Hardware
 
 P40 is passively cooled → ensure server airflow/fan profiles are correct.
 Your 10Gb SFP+ is ideal for shared model storage (NFS / MinIO).
 vLLM officially expects compute capability ≥ 7.0, but source builds may work on Pascal (not guaranteed). [docs.vllm.ai], [github.com]
 
 
-12) If You Want: I Can Generate a Copy/Paste Runbook (Compose + Topology)
+##12) If You Want: I Can Generate a Copy/Paste Runbook (Compose + Topology)
 To turn this into an exact “do this” guide (Docker Compose files + folder structure + service map), answer these 4:
 
 Which OS will you run on R720/R720xd? (Ubuntu 22.04?)
