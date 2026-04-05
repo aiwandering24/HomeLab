@@ -1,7 +1,7 @@
 # 🚀 Local LLM Training + Inference + RAG Tech Stack
 
 This technical manifest outlines the architecture for a high-performance "Homelab AI Cluster" optimized for **NVIDIA Tesla P40 (Pascal)** hardware.
-
+![Alt Text](https://github.com/aiwandering24/HomeLab/blob/main/Designer%20(3).png)
 ---
 
 ## 🛠️ Hardware Profile & Constraints
@@ -83,6 +83,8 @@ This technical manifest outlines the architecture for a high-performance "Homela
 *   **Prometheus:** Scraping metrics from all cluster nodes.
 
 ---
+
+![Alt Text](https://github.com/aiwandering24/HomeLab/blob/main/ai-architecture-pattern.png)
 
 > **Note:** Because the **Tesla P40** lacks Tensor Cores found in newer architectures, prioritize **GGUF (llama.cpp)** for the most efficient math kernels on Pascal hardware.
 
