@@ -60,3 +60,17 @@ sudo apt update
 sudo apt install --reinstall ubuntu-gnome-desktop gdm3
 
 ```
+## 5. Force Xorg instead of Wayland
+```bash
+sudo nano /etc/gdm3/custom.conf
+WaylandEnable=false
+sudo systemctl restart gdm
+nvidia-smi
+```
+## 6. Install a Virtual Display Driver (Dummy Driver):
+This tricks the NVIDIA card into thinking a monitor is plugged in so the desktop can start.
+bash
+```bash
+sudo apt update
+sudo apt install xserver-xorg-video-dummy
+```
