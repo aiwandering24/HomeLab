@@ -135,6 +135,13 @@ Tip: I recommend version 550 for Ubuntu 24.04, as it is better optimized for the
 sudo apt install nvidia-driver-550
 sudo apt install nvidia-driver-535 nvidia-utils-535
 ```
+***SecureBoot will be asking to set password Once done, Reboot after installation complete, then Once you reboot, it will ask you to : Enroll MOK
+Alternative: Enroll MOK (Keep Secure Boot On) 
+If you must keep Secure Boot on (e.g., for certain anti-cheat software in Windows), you can "authorize" the driver instead:
+Run sudo update-secureboot-policy --enroll-key in your terminal and set a password.
+Reboot. A blue screen called MOK Management will appear.
+Select Enroll MOK, then Continue, then Yes.
+Enter the password you created and select Reboot.
 5. Final Configuration & Reboot
 Once the installation finishes without errors, trigger the final configuration and update your boot RAM disk:
 
