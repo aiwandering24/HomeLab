@@ -75,6 +75,18 @@ bash
 sudo apt update
 sudo apt install xserver-xorg-video-dummy
 ```
+Step 3: Fix the "Phantom Monitor" Problem
+The NVIDIA driver won't start a desktop session if it thinks there is no monitor. We need to "trick" it.
+Generate a basic Xorg config:
+```bash
+sudo nvidia-xconfig --allow-empty-initial-configuration
+```
+Use code with caution.
+
+Restart the Display Manager:
+```bash
+sudo systemctl restart gdm
+```
 ## 9. Check if gpu is present and Install Driver
 ```bash
 lspci | grep 01:00
