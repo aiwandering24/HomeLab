@@ -136,8 +136,230 @@ EA-XR Admin UI (Figma)
 │   ├── XR Clients
 │   ├── Integrations
 │   └── Audit & Security
-```
-
+ea-xr-platform/
+│
+├── README.md
+│   # High-level platform overview
+│   # Vision, supported devices, screenshots, demo links
+│
+├── AR-VR-readme-file.md
+│   # ✅ The consolidated master document you requested
+│
+├── docs/
+│   ├── architecture/
+│   │   ├── system-overview.md
+│   │   ├── backend-architecture.md
+│   │   ├── ai-architecture.md
+│   │   ├── xr-architecture.md
+│   │   ├── security-multitenancy.md
+│   │   └── deployment-topology.md
+│   │
+│   ├── data-models/
+│   │   ├── canonical-ea-model.md
+│   │   ├── archimate-mapping.md
+│   │   ├── business-templates.md
+│   │   ├── department-models/
+│   │   │   ├── it.md
+│   │   │   ├── hr.md
+│   │   │   ├── finance.md
+│   │   │   └── operations.md
+│   │   └── versioning-strategy.md
+│   │
+│   ├── migration/
+│   │   ├── leanix-migration.md
+│   │   ├── sparx-migration.md
+│   │   ├── mega-hopex-migration.md
+│   │   ├── coexistence-strategy.md
+│   │   └── ai-assisted-migration.md
+│   │
+│   ├── api/
+│   │   ├── openapi.yaml
+│   │   ├── auth.md
+│   │   ├── assets.md
+│   │   ├── templates.md
+│   │   ├── ai.md
+│   │   └── unity-integration.md
+│   │
+│   └── roadmap/
+│       ├── mvp.md
+│       ├── enterprise.md
+│       └── future-vision.md
+│
+├── backend/
+│   ├── src/
+│   │   ├── Auth/
+│   │   │   ├── AuthController.cs
+│   │   │   ├── JwtService.cs
+│   │   │   └── OidcAdapters/
+│   │   │
+│   │   ├── Organizations/
+│   │   │   ├── OrganizationController.cs
+│   │   │   ├── OrganizationService.cs
+│   │   │   └── TenantIsolation.cs
+│   │   │
+│   │   ├── Licensing/
+│   │   │   ├── SubscriptionController.cs
+│   │   │   ├── Plans.cs
+│   │   │   └── StripeWebhookHandler.cs
+│   │   │
+│   │   ├── Assets/
+│   │   │   ├── AssetController.cs
+│   │   │   ├── AssetMetadata.cs
+│   │   │   └── StorageAdapters/
+│   │   │
+│   │   ├── Templates/
+│   │   │   ├── TemplateController.cs
+│   │   │   ├── DepartmentTemplates/
+│   │   │   └── ValidationRules.cs
+│   │   │
+│   │   ├── EA/
+│   │   │   ├── EAObject.cs
+│   │   │   ├── EARelationship.cs
+│   │   │   ├── ArchimateValidator.cs
+│   │   │   └── GovernanceEngine.cs
+│   │   │
+│   │   ├── AI/
+│   │   │   ├── AIController.cs
+│   │   │   ├── PromptPolicyEnforcer.cs
+│   │   │   └── ExplainabilityLogger.cs
+│   │   │
+│   │   └── Shared/
+│   │       ├── DTOs/
+│   │       ├── Middleware/
+│   │       └── AuditLogging/
+│   │
+│   ├── migrations/
+│   ├── tests/
+│   └── Dockerfile
+│
+├── ai-services/
+│   ├── orchestrator/
+│   │   ├── prompt-engine/
+│   │   │   ├── base-system-prompt.txt
+│   │   │   ├── ea-creation.prompts.md
+│   │   │   ├── ea-analysis.prompts.md
+│   │   │   └── migration.prompts.md
+│   │   │
+│   │   ├── policies/
+│   │   │   ├── allowed-actions.yaml
+│   │   │   ├── tenant-boundaries.yaml
+│   │   │   └── ai-modes.yaml
+│   │   │
+│   │   ├── rag/
+│   │   │   ├── vector-index/
+│   │   │   ├── ingestion-pipeline/
+│   │   │   └── retriever.py
+│   │   │
+│   │   └── memory/
+│   │       ├── session-memory.py
+│   │       └── long-term-memory.py
+│   │
+│   ├── inference/
+│   │   ├── local-llm/
+│   │   └── cloud-llm/
+│   │
+│   └── speech/
+│       ├── stt/
+│       └── tts/
+│
+├── unity-client/
+│   ├── Assets/
+│   │   ├── Scenes/
+│   │   │   ├── XR_Admin_ControlPlane.unity
+│   │   │   └── XR_Login.unity
+│   │   │
+│   │   ├── Prefabs/
+│   │   │   ├── Panels/
+│   │   │   │   ├── DashboardPanel.prefab
+│   │   │   │   ├── EAStandardsPanel.prefab
+│   │   │   │   ├── AIControlPanel.prefab
+│   │   │   │   └── XRClientsPanel.prefab
+│   │   │   │
+│   │   │   └── Cards/
+│   │   │       ├── KPICard.prefab
+│   │   │       ├── RuleCard.prefab
+│   │   │       └── DeviceCard.prefab
+│   │   │
+│   │   ├── Scripts/
+│   │   │   ├── Core/
+│   │   │   │   ├── XRUIManager.cs
+│   │   │   │   └── PanelManager.cs
+│   │   │   │
+│   │   │   ├── DataBinding/
+│   │   │   │   ├── KpiBinder.cs
+│   │   │   │   └── EAObjectBinder.cs
+│   │   │   │
+│   │   │   ├── Interaction/
+│   │   │   │   ├── XRInputRouter.cs
+│   │   │   │   └── FloatingCard.cs
+│   │   │   │
+│   │   │   ├── Voice/
+│   │   │   │   ├── VoiceIntentRouter.cs
+│   │   │   │   └── AdminCommands.cs
+│   │   │   │
+│   │   │   └── Networking/
+│   │   │       └── BackendApiClient.cs
+│   │   │
+│   │   └── ScriptableObjects/
+│   │       ├── CapabilitySO.cs
+│   │       ├── ApplicationSO.cs
+│   │       └── TemplateSO.cs
+│   │
+│   ├── Packages/
+│   └── ProjectSettings/
+│
+├── web-portal/
+│   ├── app/
+│   │   ├── dashboard/
+│   │   ├── organizations/
+│   │   ├── ea-standards/
+│   │   ├── ai-config/
+│   │   └── xr-clients/
+│   │
+│   ├── components/
+│   │   ├── Sidebar.tsx
+│   │   ├── KpiCard.tsx
+│   │   ├── RuleCard.tsx
+│   │   └── DeviceCard.tsx
+│   │
+│   ├── services/
+│   │   ├── api.ts
+│   │   ├── auth.ts
+│   │   └── ai.ts
+│   │
+│   └── styles/
+│       └── tokens.css
+│
+├── design/
+│   ├── README.md
+│   ├── figma-json/
+│   │   ├── design_tokens.json
+│   │   ├── root_frame.json
+│   │   ├── sidebar_component.json
+│   │   ├── card_component.json
+│   │   ├── kpi_card_instance.json
+│   │   ├── dashboard_layout.json
+│   │   ├── ea_rule_card.json
+│   │   ├── ai_module.json
+│   │   └── xr_device_card.json
+│   │
+│   └── figma-plugin/
+│       ├── manifest.json
+│       ├── code.ts
+│       └── ui.html
+│
+├── infra/
+│   ├── terraform/
+│   │   ├── azure/
+│   │   └── aws/
+│   │
+│   ├── helm/
+│   └── ci-cd/
+│       ├── github-actions.yml
+│       └── unity-build.yml
+│
+└── LICENSE
+--
 ### 3.2 Core Layout
 Frame: width 1440px, 12 column grid; Sidebar: 260px; Top bar height 64px; Left navigation persistent.
 
