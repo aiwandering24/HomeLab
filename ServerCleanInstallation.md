@@ -1,5 +1,10 @@
 # How to Wipe a Proxmox Disk Locked by LVM
+```bash
+lsblk
+lsblk -o Name, SIZE, SFTYPE, MOUNTPOINTS,TYPE
+sgdisk --zap-all /dev/sda 
 
+```
 If you see partitions like `pveswap`, `root`, `data_tmeta`, and `data_tdata` under `sda3`, it means the partition is currently locked by active **LVM (Logical Volume Manager)** groups. 
 
 > [!CAUTION]
