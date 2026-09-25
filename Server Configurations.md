@@ -6,6 +6,11 @@
 | **`ai-data-pool`** | ZFS RAIDZ1 | `/dev/sde`<br>`/dev/sdh`<br>`/dev/sdi` | 2.7 TB | **~1.6 TB** | **ZFS (ZFSPool)** | High random IOPS workspace for scrapers (Crawl4AI), relational tables (n8n pipelines), and Vector DB arrays (Qdrant). |
 | **`scratch-backup`** | Standard Linux Directory | `/dev/sdg` | 1.0 TB | **~930 GB** | **Directory** | Cold storage for code repository forks, snapshot points, local logs, and periodic Markdown knowledge base packaging. |
 
+/mnt/ai_storage/
+├── Storage1/  --> Bound to /mnt/pve/Storage1 (1TB) -> Staging Raw Extracts
+├── Storage2/  --> Bound to /mnt/pve/Storage2 (1TB) -> Vector Database Shards
+├── Storage3/  --> Bound to /mnt/pve/Storage3 (1TB) -> Model Layer Cache
+└── ...
 
 
 | Device 		 | StorageDirectory  	| Type  	 | Usage     | Size | GPT | Model | Serial | S.M.A.R.T. | M... | Wearout |
