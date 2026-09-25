@@ -2,7 +2,13 @@
 ```bash
 lsblk
 lsblk -o Name, SIZE, SFTYPE, MOUNTPOINTS,TYPE
-sgdisk --zap-all /dev/sda 
+sgdisk --zap-all /dev/sda
+
+Clean Disks- Prepare for Mount - Directory - Before GPT. 
+sgdisk --zap-all /dev/sdX
+wipefs -a /dev/sdX
+dd if=/dev/zero of=/dev/sdX bs=1M count=100 conv=fdatasync
+
 
 ```
 If you see partitions like `pveswap`, `root`, `data_tmeta`, and `data_tdata` under `sda3`, it means the partition is currently locked by active **LVM (Logical Volume Manager)** groups. 
