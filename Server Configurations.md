@@ -20,8 +20,6 @@
 | `/mnt/scratch-backup/Storage8/` | `sdi` | `/mnt/pve/Storage8` | 899.53 GB | Obsidian Knowledge Base & Code Backups |
 
 
-
-
 | Device 		 | StorageDirectory  	| Type  	 | Usage     | Size | GPT | Model | Serial | S.M.A.R.T. | M... | Wearout |
 | :--- 			 | :---    	| :---    	 | :---      | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **`/dev/sda`** | OS-SSD  | unknown   | partitions | 799.54 GB | Yes | PERC_H710 | 6848f690e9a1a5003241928... | UNKNOWN | No | N/A |
@@ -44,3 +42,23 @@
 | ↳ `/dev/sdh1`  | Storage6| partition | ext4 | 899.53 GB | Yes | | | | Yes | N/A |
 | **`/dev/sdi`** | Storage8  | unknown   | partitions | 899.53 GB | Yes | PERC_H710 | 6848f690e9a1a50030eddb2... | UNKNOWN | No | N/A |
 | ↳ `/dev/sdi1`  | Storage8| partition | ext4 | 899.53 GB | Yes | | | | Yes | N/A |
+
+#Server C
+ | Device | Type | Usage | Size | GPT | Model | Serial | S.M.A.R.T. | M... | Wearout |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **`/dev/sda`** | unknown | partitions | 999.65 GB | Yes | PERC_H710 | 6848f690e9a1a500324086c... | UNKNOWN | No | N/A |
+| ↳ `/dev/sda1` | partition | BIOS boot | 1.03 MB | Yes | | | | No | N/A |
+| ↳ `/dev/sda2` | partition | EFI | 1.07 GB | Yes | | | | Yes | N/A |
+| ↳ `/dev/sda3` | partition | LVM | 998.58 GB | Yes | | | | No | N/A |
+| **`/dev/sdb`** | unknown | partitions | 999.65 GB | Yes | PERC_H710 | 690b11c005de570032497cc... | UNKNOWN | No | N/A |
+| ↳ `/dev/sdb1` | partition | ext4 | 999.65 GB | Yes | | | | Yes | N/A |
+| **`/dev/sdc`** | unknown | partitions | 999.65 GB | Yes | PERC_H710 | 690b11c005de570032497cd... | UNKNOWN | No | N/A |
+| ↳ `/dev/sdc1` | partition | ext4 | 999.65 GB | Yes | | | | Yes | N/A |
+| **`/dev/sdd`** | unknown | partitions | 999.65 GB | Yes | PERC_H710 | 690b11c005de570032497d6... | UNKNOWN | No | N/A |
+| ↳ `/dev/sdd1` | partition | ext4 | 999.65 GB | Yes | | | | Yes | N/A |
+| **`/dev/sde`** | unknown | partitions | 899.53 GB | Yes | PERC_H710 | 690b11c005de570032497d7... | UNKNOWN | No | N/A |
+| ↳ `/dev/sde1` | partition | ext4 | 899.53 GB | Yes | | | | Yes | N/A |
+| **`/dev/sdf`** | unknown | partitions | 599.55 GB | Yes | PERC_H710 | 690b11c005de570032497d8... | UNKNOWN | No | N/A |
+| ↳ `/dev/sdf1` | partition | ext4 | 599.55 GB | Yes | | | | Yes | N/A |
+| **`/dev/sdg`** | unknown | partitions | 299.44 GB | Yes | PERC_H710 | 690b11c005de570032497d9... | UNKNOWN | No | N/A |
+| ↳ `/dev/sdg1` | partition | ext4 | 299.44 GB | Yes | | | | Yes | N/A |
