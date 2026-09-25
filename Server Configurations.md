@@ -6,15 +6,17 @@
 | **`ai-data-pool`** | ZFS RAIDZ1 | `/dev/sde`<br>`/dev/sdh`<br>`/dev/sdi` | 2.7 TB | **~1.6 TB** | **ZFS (ZFSPool)** | High random IOPS workspace for scrapers (Crawl4AI), relational tables (n8n pipelines), and Vector DB arrays (Qdrant). |
 | **`scratch-backup`** | Standard Linux Directory | `/dev/sdg` | 1.0 TB | **~930 GB** | **Directory** | Cold storage for code repository forks, snapshot points, local logs, and periodic Markdown knowledge base packaging. |
 
-/mnt/ai_storage/
-├── Storage1/  # Bound to /mnt/pve/Storage1 (1TB) -> Staging Raw Extracts
-├── Storage2/  # Bound to /mnt/pve/Storage2 (1TB) -> Vector Database Shards
-├── Storage3/  # Bound to /mnt/pve/Storage3 (1TB) -> Model Layer Cache
-├── Storage4/  # Bound to /mnt/pve/Storage4 (1TB) -> Crawl4AI Raw Scrapes
-├── Storage5/  # Bound to /mnt/pve/Storage5 (1TB) -> Pipeline Working Data
-├── Storage6/  # Bound to /mnt/pve/Storage6 (900GB) -> Database Logs & Indexes
-├── Storage7/  # Bound to /mnt/pve/Storage7 (900GB) -> Active Workspace Tables
-└── Storage8/  # Bound to /mnt/pve/Storage8 (900GB) -> Obsidian Knowledge Base Backups
+
+| Target Mount Path (Inside Guest) | Proxmox Host Storage Path | Physical Disk Size | Target AI Workload Feature / Usage |
+| :--- | :--- | :--- | :--- |
+| `/mnt/ai_storage/Storage1/` | `/mnt/pve/Storage1` | 1.0 TB | Staging Raw Extracts |
+| `/mnt/ai_storage/Storage2/` | `/mnt/pve/Storage2` | 1.0 TB | Vector Database Shards (Qdrant / Chroma) |
+| `/mnt/ai_storage/Storage3/` | `/mnt/pve/Storage3` | 1.0 TB | Model Layer Cache & Ollama Engine Blobs |
+| `/mnt/ai_storage/Storage4/` | `/mnt/pve/Storage4` | 1.0 TB | Crawl4AI Raw Web Scrapes & Markdown Extracts |
+| `/mnt/ai_storage/Storage5/` | `/mnt/pve/Storage5` | 1.0 TB | Pipeline Working Data (n8n execution contexts) |
+| `/mnt/ai_storage/Storage6/` | `/mnt/pve/Storage6` | 900 GB | Database Transaction Logs & Index Files |
+| `/mnt/ai_storage/Storage7/` | `/mnt/pve/Storage7` | 900 GB | Active Workspace Tables & Temp Data |
+| `/mnt/ai_storage/Storage8/` | `/mnt/pve/Storage8` | 900 GB | Obsidian Knowledge Base & Code Backups |
 
 
 
