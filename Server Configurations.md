@@ -7,16 +7,18 @@
 | **`scratch-backup`** | Standard Linux Directory | `/dev/sdg` | 1.0 TB | **~930 GB** | **Directory** | Cold storage for code repository forks, snapshot points, local logs, and periodic Markdown knowledge base packaging. |
 
 
-| Target Mount Path (Inside Guest)|Disks  | Proxmox Host Storage Path | Physical Disk Size | Target AI Workload Feature / Usage |
-| :--- 						  		| :--- | :--- | :--- |
-| `/mnt/ai_storage/Storage1/` 	| sdb	| `/mnt/pve/Storage1` | 1.0 TB | Staging Raw Extracts |
-| `/mnt/ai_storage/Storage2/` 	| sdc	| `/mnt/pve/Storage2` | 1.0 TB | Vector Database Shards (Qdrant / Chroma) |
-| `/mnt/ai_storage/Storage3/` 	| sdd	| `/mnt/pve/Storage3` | 1.0 TB | Model Layer Cache & Ollama Engine Blobs |
-| `/mnt/ai_storage/Storage4/` 	| sde	| `/mnt/pve/Storage4` | 1.0 TB | Crawl4AI Raw Web Scrapes & Markdown Extracts |
-| `/mnt/ai_storage/Storage5/` 	| sdf	| `/mnt/pve/Storage5` | 1.0 TB | Pipeline Working Data (n8n execution contexts) |
-| `/mnt/ai_storage/Storage6/` 	| sdg	| `/mnt/pve/Storage6` | 900 GB | Database Transaction Logs & Index Files |
-| `/mnt/ai_storage/Storage7/` 	| sdh	| `/mnt/pve/Storage7` | 900 GB | Active Workspace Tables & Temp Data |
-| `/mnt/ai_storage/Storage8/` 	| sdi	| `/mnt/pve/Storage8` | 900 GB | Obsidian Knowledge Base & Code Backups |
+
+| Target Mount Path (Inside Guest) | Disks | Proxmox Host Storage Path | Physical Disk Size | Target AI Workload Feature / Usage |
+| :--- | :--- | :--- | :--- | :--- |
+| `/mnt/ai_storage/Storage1/` | `sdb` | `/mnt/pve/Storage1` | 1.0 TB | Staging Raw Extracts |
+| `/mnt/ai_storage/Storage2/` | `sdc` | `/mnt/pve/Storage2` | 1.0 TB | Vector Database Shards (Qdrant / Chroma) |
+| `/mnt/ai_storage/Storage3/` | `sdd` | `/mnt/pve/Storage3` | 1.0 TB | Model Layer Cache & Ollama Engine Blobs |
+| `/mnt/ai_storage/Storage4/` | `sde` | `/mnt/pve/Storage4` | 1.0 TB | Crawl4AI Raw Web Scrapes & Markdown Extracts |
+| `/mnt/ai_storage/Storage5/` | `sdf` | `/mnt/pve/Storage5` | 1.0 TB | Pipeline Working Data (n8n execution contexts) |
+| `/mnt/ai_storage/Storage6/` | `sdg` | `/mnt/pve/Storage6` | 900 GB | Database Transaction Logs & Index Files |
+| `/mnt/ai_storage/Storage7/` | `sdh` | `/mnt/pve/Storage7` | 900 GB | Active Workspace Tables & Temp Data |
+| `/mnt/ai_storage/Storage8/` | `sdi` | `/mnt/pve/Storage8` | 900 GB | Obsidian Knowledge Base & Code Backups |
+
 
 
 
