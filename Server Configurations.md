@@ -7,10 +7,15 @@
 | **`scratch-backup`** | Standard Linux Directory | `/dev/sdg` | 1.0 TB | **~930 GB** | **Directory** | Cold storage for code repository forks, snapshot points, local logs, and periodic Markdown knowledge base packaging. |
 
 /mnt/ai_storage/
-├── Storage1/  --> Bound to /mnt/pve/Storage1 (1TB) -> Staging Raw Extracts
-├── Storage2/  --> Bound to /mnt/pve/Storage2 (1TB) -> Vector Database Shards
-├── Storage3/  --> Bound to /mnt/pve/Storage3 (1TB) -> Model Layer Cache
-└── ...
+├── Storage1/  # Bound to /mnt/pve/Storage1 (1TB) -> Staging Raw Extracts
+├── Storage2/  # Bound to /mnt/pve/Storage2 (1TB) -> Vector Database Shards
+├── Storage3/  # Bound to /mnt/pve/Storage3 (1TB) -> Model Layer Cache
+├── Storage4/  # Bound to /mnt/pve/Storage4 (1TB) -> Crawl4AI Raw Scrapes
+├── Storage5/  # Bound to /mnt/pve/Storage5 (1TB) -> Pipeline Working Data
+├── Storage6/  # Bound to /mnt/pve/Storage6 (900GB) -> Database Logs & Indexes
+├── Storage7/  # Bound to /mnt/pve/Storage7 (900GB) -> Active Workspace Tables
+└── Storage8/  # Bound to /mnt/pve/Storage8 (900GB) -> Obsidian Knowledge Base Backups
+
 
 
 | Device 		 | StorageDirectory  	| Type  	 | Usage     | Size | GPT | Model | Serial | S.M.A.R.T. | M... | Wearout |
