@@ -24,3 +24,4 @@
         Version     : 374               Sector      : 47
         Date        : 11/09/2011        Time        : 11:45:09
    -----------------------------------------------------------------------
+   https://www.se.com/ca/en/product/AP7930/rack-pdu-switched-zero-u-20a-120v-24520/
